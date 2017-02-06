@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>react中访问DOM</title>
+	 <script src="../../react-15.3.1/build/react.js"></script>
+     <script src="../../react-15.3.1/build/react-dom.js"></script>
+     <script src="../../react-15.3.1/build/browser.min.js"></script>
+</head>
+<body>
+	<div id="example"></div>
+	<script type="text/babel">
+		//es6语法
+		var MyComponent = React.createClass({
+		    handleClick: function() {
+		        // Explicitly focus the text input using the raw DOM API.
+		        if (this.myTextInput !== null) {
+		            this.myTextInput.focus();
+		        }
+		    },
+		    render: function() {
+		      return (
+		            <div>
+		                <input type="text" ref={ (ref)=>this.myTextInput = ref } />
+		                <input
+		                    type="button"
+		                    value="Focus the text input"
+		                    onClick={this.handleClick}
+		                    />
+		            </div>
+		        );
+		    }
+		});
+		
+		// commonjs
+		var MyComponent2 = React.createClass({
+		    handleClick: function() {
+		        // Explicitly focus the text input using the raw DOM API.
+		        if (this.myTextInput !== null) {
+		            this.myTextInput.focus();
+		        }
+		    },
+		    render: function() {
+		      return (
+		            <div>
+		                <input type="text" ref={ function(ref){this.myTextInput = ref}.bind(this) } />
+		                <input
+		                    type="button"
+		                    value="Focus the text input"
+		                    onClick={this.handleClick}
+		                    />
+		            </div>
+		        );
+		    }
+		});
+
+		ReactDOM.render(
+			<MyComponent2/>,
+			document.getElementById('example')
+		)
+	</script>
+</body>
+</html>
