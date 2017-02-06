@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	 <script src="../react-15.3.1/build/react.js"></script>
+     <script src="../react-15.3.1/build/react-dom.js"></script>
+     <script src="../react-15.3.1/build/browser.min.js"></script>
+</head>
+<body>
+<div id="example"></div>
+<script type="text/babel">
+	{/*遇到<开头的就用html解析，遇到{就用js解析*/}
+	var NotesList = React.createClass({
+	  render: function() {
+	    return (
+	      <ul>
+	      {
+	      	// 遍历
+	      	//this.props.children:有三个值
+	      	//						如果没有节点：则为undefined
+	      	//						如果只有一个节点：则为object
+	      	//						如果有多个节点，则为array
+	      	//React提供Children来处理 this.props.children  我们可以用 React.Children.map 来遍历子节点，
+	        React.Children.map(this.props.children, function (child) {
+	          return <li>{child}</li>;
+	        })
+	      }
+	      </ul>
+	    );
+	  }
+	});
+
+	ReactDOM.render(
+	  <NotesList>
+	    <span>hello</span>
+	    <span>world</span>
+	  </NotesList>,
+	  document.getElementById('example')
+	);
+
+</script>
+</body>
+</html>

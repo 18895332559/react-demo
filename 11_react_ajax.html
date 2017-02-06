@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	 <script src="../react-15.3.1/build/react.js"></script>
+     <script src="../react-15.3.1/build/react-dom.js"></script>
+     <script src="../react-15.3.1/build/browser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+<body>
+<div id="example"></div>
+<script type="text/babel">
+	{/*将模板转换成为html语言，并且插入dom节点*/}
+	var UserGist = React.createClass({
+		getInitialState:function(){
+			return {
+				username:'',
+				lastGistUrl:''
+			};
+		},
+		componentDidMount:function(){
+			// 使用jquery
+			$.get(this.props.source,function(result){
+				var lastGistUrl = result[0] ;
+				if(this.isMounted){ // 判断是否已经加载完成
+					this.setState({
+						username:lastGistUrl.owner.login,
+						lastGistUrl:lastGistUrl.html_url
+					});
+				}
+				console.log('result:' + result)
+				console.log('this:' + this ) ;
+			}.bind(this));			
+		},
+
+		render:function(){
+			return (
+				<div>
+					{this.state.username}'s last gist is
+					 <a href={this.state.lastGistUrl}>here</a>.
+				</div>
+			);
+		}
+	});
+
+	ReactDOM.render(
+		  <UserGist source="https://api.github.com/users/octocat/gists" />,
+		  document.getElementById('example')
+	);
+
+</script>
+</body>
+</html>

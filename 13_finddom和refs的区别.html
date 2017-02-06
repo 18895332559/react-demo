@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>finddom和refs的区别</title>
+	<script src="../react-15.3.1/build/react.js"></script>
+    <script src="../react-15.3.1/build/react-dom.js"></script>
+    <script src="../react-15.3.1/build/browser.min.js"></script>
+</head>
+<div id="example"></div>
+<body>
+	<script type="text/babel">
+		var MyComponent = React.createClass({
+			handleClick:function(){
+				var myTextInput = this.refs.myTextInput;
+				<!-- var textInputDom = React.findDOMNode(this.refs.myTextInput); -->
+				console.log('myTextInput:' + myTextInput ) ;
+				<!-- console.log('textInputDom:' + textInputDom ) ; -->
+			},
+			render:function(){
+				return(
+					<div>
+						<input type="text" ref='myTextInput'/>
+						<br/><br/><br/>
+						<input type="button" value="Facus the text input" onClick={this.handleClick} />
+						<br/><br/><br/>
+						<p ref='myp'>Hello ref</p>
+					</div>
+				);
+			}
+	});
+
+	ReactDOM.render(
+		<MyComponent/>,
+		document.getElementById('example')
+	)
+	</script>
+</body>
+</html>

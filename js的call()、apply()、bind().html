@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript">
+		/*
+			apply()
+		*/
+		function sum(num1,num2){
+			return num1 + num2 ;
+		}
+
+		function applySum1(num2,num2){
+			return sum.apply(this,arguments);
+		}
+
+		function applySum2(num1,num2){
+			return sum.apply(this,[num1,num2]);
+		}
+		/**
+			call()和apply作用相同，只是在第二个参数的传递时，必须列举出来
+		*/
+		function callSum1(num1,num2){
+			sum.call(this,num1,num2) ;
+		}
+
+		/*
+			bind(object):将函数的this值指向object
+
+			这里：sayColor调用bind()并且传入o，创建objectColor函数，
+			此时objectColor的this相当于o，因此在全局调用objectColor()也是blue
+		*/
+
+		window.color = 'red' ;
+		var o = {color:'blue'} ;
+		function sayColor(){
+			alert(this.color) ;
+		}
+		var objectColor = sayColor.bind(o) ;
+		objectColor(); // blue
+
+
+	</script>
+</head>
+<body>
+
+</body>
+</html>

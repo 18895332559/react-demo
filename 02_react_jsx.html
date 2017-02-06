@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	 <script src="../react-15.3.1/build/react.js"></script>
+     <script src="../react-15.3.1/build/react-dom.js"></script>
+     <script src="../react-15.3.1/build/browser.min.js"></script>
+</head>
+<body>
+<div id="example"></div>
+<script type="text/babel">
+	{/*遇到<开头的就用html解析，遇到{就用js解析*/}
+	var names=['Alice','Emily','Kate']
+	ReactDOM.render(
+		<div>
+			{
+				names.map(function(name){
+					return <div>Hello,{name}</div>
+				})
+			}
+			
+		</div>
+		,
+		document.getElementById('example')
+	);
+</script>
+</body>
+</html>

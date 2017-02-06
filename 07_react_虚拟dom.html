@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	 <script src="../react-15.3.1/build/react.js"></script>
+    <script src="../react-15.3.1/build/react-dom.js"></script>
+    <script src="../react-15.3.1/build/browser.min.js"></script>
+</head>
+<body>
+<div id="example"></div>
+<script type="text/babel">
+	var MyComponent = React.createClass({
+			handleClick:function(){
+				var myTextInput =  this.refs.myTextInput;
+				var myp =  		   this.refs.myp;
+				console.log('虚拟DOM myp：' + myp.width) ;
+				this.refs.myTextInput.focus();
+		},
+		render:function(){
+			return(
+				<div>
+					<input type="text" ref='myTextInput'/>
+					<br/><br/><br/>
+					<input type="button" value="Facus the text input" onClick={this.handleClick} />
+					<br/><br/><br/>
+					<p ref='myp'>Hello ref</p>
+				</div>
+			);
+		}
+	});
+
+	ReactDOM.render(
+		<MyComponent/>,
+		document.getElementById('example')
+	)
+
+</script>
+</body>
+</html>
